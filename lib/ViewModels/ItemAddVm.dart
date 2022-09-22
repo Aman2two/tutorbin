@@ -18,11 +18,12 @@ class ItemAddVm extends BaseViewModel {
   ItemAddVm() {
     createDataFromJson().then((value) {
       notifyListeners();
+      localStorage.init().then((value) {
+        fetchSavedData();
+        Future.delayed(const Duration(milliseconds: 400),(){notifyListeners();});
+      });
     });
-    localStorage.init().then((value) {
-      fetchSavedData();
-      notifyListeners();
-    });
+
   }
 
   handleElementAdd(Product product, {bool isAdd = true}) {
@@ -112,7 +113,6 @@ class ItemAddVm extends BaseViewModel {
     if(popularProducts.isNotEmpty){
       menuItems.insert(0, MenuBean.name("Popular products",popularProducts));
     }
-    notifyListeners();
   }
 
 }
