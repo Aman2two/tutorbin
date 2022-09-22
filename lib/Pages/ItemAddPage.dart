@@ -36,7 +36,14 @@ class ItemAddPage extends StatelessWidget {
         margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
         height: MediaQuery.of(context).size.height * .07,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            itemAddVm.handleOrderPlaced().then((value){
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => this));
+            });
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

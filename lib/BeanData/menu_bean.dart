@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class MenuBean{
   String? category;
   List<Product>? products;
@@ -16,12 +18,23 @@ class Product{
   int count=0;
   bool isBestSeller=false;
 
-  Product.name(this.name, this.price, this.inStock);
+  Product.name(this.name, this.price, this.inStock,this.count);
 
   static Product fromJson(Map<String,dynamic> json){
     return Product.name(
         json["name"],
         json["price"],
-        json["instock"]);
+        json["instock"],
+        json["count"]??0
+    );
+  }
+
+  Map<String,dynamic>  toJson(){
+    return {
+      "name":name,
+      "price":price,
+      "instock":inStock,
+      "count":count,
+    };
   }
 }
